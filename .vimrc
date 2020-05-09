@@ -4,20 +4,26 @@ set number "enable line numbers
 set wildmenu
 set nocompatible
 set encoding=utf-8
+set updatetime=50
 
 " Mapleader allows to do extra key combinations like <leade>w for saving
 let mapleader = ","
 let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
+nnoremap <leader>q :qa<cr>
 
 map q <Nop>
 
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
 " ============== UI ==============
 
-"set background=dark
+set background=dark
 syntax on
-hi Visual term=reverse cterm=reverse guibg=Grey
+hi Visual term=reverse cterm=reverse guibg=grey
 try
 colorscheme molokai
 catch
@@ -25,8 +31,6 @@ endtry
 
 " set 8 lines to cursos 
 set so=8
-
-" Always show current position
 set ruler
 
 set wildmenu
@@ -62,16 +66,32 @@ set mat=2
 " Margin on the left
 "set foldcolumn=1
 
+" tree view
+let g:netrw_browse_split=2
+let g:netrw_banner=0
+let g:netrw_winsize=15
+nnoremap <leader>ve :Vexplore<CR>
+
+"let g:netrw_liststyle = 3
+"let g:netrw_altv = 1
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
+
 " =========== Text, tab and indent related =====================
 
 " Be smart when using tabs ;)
+set smartindent
 set smarttab
 
 " 1 tab = 4 spaces
-set tabstop=4
+set tabstop=4 softtabstop=4
 set shiftwidth=4
+" from tab to spaces
+set expandtab
 
-set wrap "Wrap lines
+set nowrap "Dont wrap lines
 set cindent
 set cinkeys-=0#
 
@@ -88,6 +108,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tomasr/molokai'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
