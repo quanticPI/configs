@@ -5,6 +5,10 @@ set wildmenu
 set nocompatible
 set encoding=utf-8
 set updatetime=50
+set noerrorbells
+set noswapfile
+set nobackup
+
 
 " Mapleader allows to do extra key combinations like <leade>w for saving
 let mapleader = ","
@@ -25,7 +29,7 @@ set background=dark
 syntax on
 hi Visual term=reverse cterm=reverse guibg=grey
 try
-colorscheme molokai
+"colorscheme gruvbox
 catch
 endtry
 
@@ -64,12 +68,12 @@ set showmatch
 set mat=2
 
 " Margin on the left
-"set foldcolumn=1
+set foldcolumn=1
 
 " tree view
 let g:netrw_browse_split=2
 let g:netrw_banner=0
-let g:netrw_winsize=15
+let g:netrw_winsize=30
 nnoremap <leader>ve :Vexplore<CR>
 
 "let g:netrw_liststyle = 3
@@ -87,13 +91,17 @@ set smarttab
 
 " 1 tab = 4 spaces
 set tabstop=4 softtabstop=4
-set shiftwidth=4
+"set shiftwidth=4
 " from tab to spaces
-set expandtab
+"set expandtab
 
 set nowrap "Dont wrap lines
 set cindent
 set cinkeys-=0#
+
+" ================= Completion ===============================
+let g:ycm_clangd_binary_path = "/usr/local/Cellar/llvm/10.0.0_3/Toolchains/LLVM10.0.0.xctoolchain/usr/bin/clangd"
+nnoremap gd :YcmCompleter GoTo<CR>
 
 " =========== VISUAL mode related ==================
 " Visual mode pressing * or # searches for the current selection
@@ -110,9 +118,15 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'morhetz/gruvbox'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 set laststatus=2
+
+try
+autocmd vimenter * colorscheme gruvbox
+catch
+endtry
 
